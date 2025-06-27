@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import { Github, Linkedin, Mail, ArrowDown, Code, Briefcase, User, Send } from "lucide-react"
@@ -9,9 +10,10 @@ import { ProjectCard } from "@/components/project-card"
 import { SkillCard } from "@/components/skill-card"
 import { TechShowcase } from "@/components/tech-showcase"
 import { SectionHeader } from "@/components/section-header"
+import { ProjectGallery } from "@/components/project-gallery"
+import { useState } from "react"
 
 export default function Portfolio() {
-  /*add additional complexity as number of projects increases*/
   return (
     <div className="min-h-screen bg-background custom-scrollbar">
       <AnimatedBackground />
@@ -238,67 +240,7 @@ export default function Portfolio() {
         <section id="projects" className="py-20 md:py-32">
           <div className="container">
             <SectionHeader title="My Projects" subtitle="Check out some of my recent work" align="center" />
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "UF SASE Website",
-                  description:
-                    "Automated fetching event slides from Google Drive API, implemented various admin tools.",
-                  image: "/thumbnails/sase-website.png",
-                  githubUrl: "https://github.com/ufsasewebmaster/UF-SASE-Website",
-                  liveUrl: "https://ufsase.com",
-                  tags: ["TypeScript", "React", "TanStack", "Google Cloud API", "Tailwind CSS"],
-                },
-                {
-                  title: "Tube Amp Simulator",
-                  description:
-                    "A cross-platform audio plugin that simulates the sound signature of a tube amplifier.",
-                  image: "/thumbnails/tube-amp-simulator.png",
-                  githubUrl: "https://github.com/elliot-liu-12/TubeAmpSimulator",
-                  liveUrl: undefined,                  
-                  tags: ["Modern C++", "JUCE"],
-                },
-                {
-                  title: "Minetest Migration",
-                  description:
-                    "Rewrote and tested 200+ API functions for an open source 3D game engine to integrate additional programming langauges.",
-                  image: "/thumbnails/minetest.png",
-                  githubUrl: "https://github.com/elliot-liu-12/minetest",
-                  liveUrl: undefined,                  
-                  tags: ["C++", "Lua"],
-                },
-                {
-                  title: "E-commerce App",
-                  description:
-                    "An e-commerce website with product management, cart functionality, and payment processing.",
-                  image: "/thumbnails/e-commerce-app.png",
-                  lightBackground: true,
-                  githubUrl: "https://github.com/elliot-liu-12/e-commerce_web_app",
-                  liveUrl: undefined,
-                  tags: ["React", "MaterialUI", "MySQL", "Stripe"],
-                },
-              ].map((project, index) => (
-                <ProjectCard
-                  key={index}
-                  title={project.title}
-                  description={project.description}
-                  image={project.image}
-                  lightBackground={project.lightBackground}
-                  githubUrl={project.githubUrl}
-                  liveUrl={project.liveUrl}
-                  tags={project.tags}
-                />
-              ))}
-            </div>
-
-            <div className="flex justify-center mt-12">
-              <Button variant="outline" className="rounded-full" size="lg">
-                <Link href="https://github.com/elliot-liu-12?tab=repositories">
-                  View All Projects
-                </Link>
-              </Button>
-            </div>
+            <ProjectGallery/>
           </div>
         </section>
 
@@ -649,5 +591,5 @@ export default function Portfolio() {
         </div>
       </footer>
     </div>
-  )
+    )
 }
