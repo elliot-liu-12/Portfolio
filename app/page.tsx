@@ -6,14 +6,38 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { AnimatedBackground } from "@/components/animated-background"
-import { ProjectCard } from "@/components/project-card"
 import { SkillCard } from "@/components/skill-card"
 import { TechShowcase } from "@/components/tech-showcase"
 import { SectionHeader } from "@/components/section-header"
 import { ProjectGallery } from "@/components/project-gallery"
-import { useState } from "react"
+import { useState, FormEvent } from "react"
+import { toast } from "react-hot-toast"
+
 
 export default function Portfolio() {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => { 
+    event.preventDefault();
+    const toastId = toast.loading("Sending...");
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", "a10026a6-4693-492c-8a22-52ef23b536b5");
+    
+    const resp = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    })
+
+    const data = await resp.json();
+    toast.dismiss(toastId);
+    if(data.success) {
+      toast.success("Form Submitted!");
+      const form = event.currentTarget;
+      form.reset();
+    } else {
+      toast.error("Submission Error - Please email me!");
+    }
+  }
+
+  
   return (
     <div className="min-h-screen bg-background custom-scrollbar">
       <AnimatedBackground />
@@ -495,7 +519,7 @@ export default function Portfolio() {
                   </div>
 
                   <div className="md:col-span-3 p-8">
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={onSubmit}>
                       <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label htmlFor="name" className="text-sm font-medium">
@@ -505,6 +529,7 @@ export default function Portfolio() {
                             id="name"
                             className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             placeholder="Your name"
+                            required
                           />
                         </div>
                         <div className="space-y-2">
@@ -516,6 +541,7 @@ export default function Portfolio() {
                             type="email"
                             className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             placeholder="Your email"
+                            required
                           />
                         </div>
                       </div>
@@ -527,6 +553,7 @@ export default function Portfolio() {
                           id="subject"
                           className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                           placeholder="Subject"
+                          required
                         />
                       </div>
                       <div className="space-y-2">
@@ -537,6 +564,7 @@ export default function Portfolio() {
                           id="message"
                           className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                           placeholder="Your message"
+                          required
                         />
                       </div>
                       <Button type="submit" className="w-full md:w-auto rounded-full" size="lg">
