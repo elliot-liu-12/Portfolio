@@ -16,16 +16,7 @@ export function ProjectGallery() {
       image: "/thumbnails/sase-website.png",
       githubUrl: "https://github.com/ufsasewebmaster/UF-SASE-Website",
       liveUrl: "https://ufsase.com",
-      tags: ["TypeScript", "React", "TanStack", "Google Cloud API", "Tailwind CSS"],
-    },
-    {
-      title: "Tube Amp Simulator",
-      description:
-        "A cross-platform audio plugin that simulates the sound signature of a tube amplifier.",
-      image: "/thumbnails/tube-amp-simulator.png",
-      githubUrl: "https://github.com/elliot-liu-12/TubeAmpSimulator",
-      liveUrl: undefined,
-      tags: ["Modern C++", "JUCE"],
+      tags: ["TypeScript", "TailwindCSS", "React", "TanStack", "Google Cloud API"],
     },
     {
       title: "Minetest Migration",
@@ -35,6 +26,25 @@ export function ProjectGallery() {
       githubUrl: "https://github.com/elliot-liu-12/minetest",
       liveUrl: undefined,
       tags: ["C++", "Lua"],
+    },
+    {
+      title: "Situation Monitor",
+      description:
+        "A model-agnostic desktop app that scrapes news sites and delivers tailored investment advice with AI.",
+      image: "/thumbnails/situation-monitor.png",
+      lightBackground: true,
+      githubUrl: "https://github.com/elliot-liu-12/situation-monitor",
+      liveUrl: undefined,
+      tags: ["Electron", "TailwindCSS", "NodeJS", "Python", "LLM"],
+    },
+    {
+      title: "Tube Amp Simulator",
+      description:
+        "A cross-platform audio plugin that simulates the sound signature of a tube amplifier.",
+      image: "/thumbnails/tube-amp-simulator.png",
+      githubUrl: "https://github.com/elliot-liu-12/TubeAmpSimulator",
+      liveUrl: undefined,
+      tags: ["Modern C++", "JUCE"],
     },
     {
       title: "E-commerce App",
