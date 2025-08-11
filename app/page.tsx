@@ -43,6 +43,9 @@ export default function Portfolio() {
     setResumeExpanded((currState) => !currState);
   }
 
+  const handleResumeLinkClick = () => {
+    setResumeExpanded(true);
+  }
 
   return (
     <div className="min-h-screen bg-background custom-scrollbar">
@@ -58,10 +61,18 @@ export default function Portfolio() {
           </div>
           <nav className="hidden md:flex items-center gap-6">
             {["About", "Resume" , "Projects" , "Skills", "Contact"].map((item) => (
-              <Link key={item} href={`#${item.toLowerCase()}`} className="text-sm font-medium relative group">
+              <div key={item}>
+                {item == "Resume" ? 
+              <Link href="#resume" onClick={handleResumeLinkClick} className="text-sm font-medium relative group">
                 <span>{item}</span>
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-              </Link>
+              </Link>:
+              <Link href={`#${item.toLowerCase()}`} className="text-sm font-medium relative group">
+                <span>{item}</span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              </Link>}
+              </div>
+
             ))}
           </nav>
           <div className="flex items-center gap-2">
@@ -263,16 +274,17 @@ export default function Portfolio() {
               </div>
             </div>
           </div>
-
-          {/* Resume Subsection */}
-          <div className="flex flex-col items-center pt-20 ">
-              <Button variant="outline" className="rounded-full p-5 max-w-60" onClick={handleExpandResumeButtonClicked}>
-                {resumeExpanded ? "Hide Resume": "Show Resume"}
-              </Button>
-              {resumeExpanded && (
-                <Resume/>
-              )}
-          </div>
+          {/* Resume Section */}
+          <section id="resume">
+            <div className="flex flex-col items-center pt-20 ">
+                <Button variant="outline" className="rounded-full p-5 max-w-60" onClick={handleExpandResumeButtonClicked}>
+                  {resumeExpanded ? "Hide Resume": "Show Resume"}
+                </Button>
+                {resumeExpanded && (
+                  <Resume/>
+                )}
+            </div>
+          </section>
         </section>
 
         {/* Projects Section */}
