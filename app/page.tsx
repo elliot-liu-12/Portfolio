@@ -10,11 +10,13 @@ import { SkillCard } from "@/components/skill-card"
 import { TechShowcase } from "@/components/tech-showcase"
 import { SectionHeader } from "@/components/section-header"
 import { ProjectGallery } from "@/components/project-gallery"
-import { useState, FormEvent } from "react"
+import { useState, FormEvent, useRef, useEffect, useCallback } from "react"
 import { toast } from "react-hot-toast"
-
+import Resume from "@/components/pdf/pdf"
 
 export default function Portfolio() {
+  const [resumeExpanded, setResumeExpanded] = useState<boolean>(false);
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => { 
     event.preventDefault();
     const toastId = toast.loading("Sending...");
@@ -37,11 +39,14 @@ export default function Portfolio() {
     }
   }
 
-  
+  const handleExpandResumeButtonClicked = () => {
+    setResumeExpanded((currState) => !currState);
+  }
+
+
   return (
     <div className="min-h-screen bg-background custom-scrollbar">
       <AnimatedBackground />
-
       {/* Header */}
       <header className="sticky top-0 z-40 w-full glassmorphism backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
@@ -52,7 +57,7 @@ export default function Portfolio() {
             </Link>
           </div>
           <nav className="hidden md:flex items-center gap-6">
-            {["About", "Projects", "Skills", "Contact"].map((item) => (
+            {["About", "Resume" , "Projects" , "Skills", "Contact"].map((item) => (
               <Link key={item} href={`#${item.toLowerCase()}`} className="text-sm font-medium relative group">
                 <span>{item}</span>
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
@@ -257,6 +262,16 @@ export default function Portfolio() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Resume Subsection */}
+          <div className="flex flex-col items-center pt-20 ">
+              <Button variant="outline" className="rounded-full p-5 max-w-60" onClick={handleExpandResumeButtonClicked}>
+                {resumeExpanded ? "Hide Resume": "Show Resume"}
+              </Button>
+              {resumeExpanded && (
+                <Resume/>
+              )}
           </div>
         </section>
 
