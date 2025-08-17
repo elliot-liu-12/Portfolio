@@ -187,7 +187,7 @@ export default function Portfolio() {
               <div className="space-y-6 animate-fade-in">
                 <div className="relative overflow-hidden rounded-2xl shadow-xl">
                   <Image
-                    src="/placeholder.svg?height=400&width=600"
+                    src="/landscape.jpg"
                     alt="About me"
                     width={600}
                     height={400}
